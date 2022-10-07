@@ -21,13 +21,13 @@ public class Articulo {
     @Column(length = 500)
     private String descricion;
     @Column(nullable = false)
-    private Date fechaRegistro;
+    private Date fecha;
     @Column(length = 50, nullable = false)
     private int stock;
     @Column(length = 100, nullable = false)
-    private double precioVenta;
+    private double venta;
     @Column(length = 100, nullable = false)
-    private int precioCompra;
+    private int compra;
     @ManyToOne
     private  Categoria categoria;
 
