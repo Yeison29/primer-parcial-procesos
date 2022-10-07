@@ -35,14 +35,34 @@ public class ArticuloController {
     }
    @GetMapping(value = "articulo/{codigo}")
     public ResponseEntity getArticulo(@PathVariable String codigo) {
-        List<Articulo> articulo = articuloRepository.findAllByCodigo(codigo);
-        if (articulo.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
+        Optional<Articulo> articulo = articuloRepository.findByCodigo(codigo);
+        if (articulo.isPresent()) {
             return new ResponseEntity(articulo, HttpStatus.OK);
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 
-
+    @PutMapping(value = "/update/{codigo}")
+    public ResponseEntity updateArticulo(@PathVariable String codigo, @RequestBody Articulo articulo){
+        Optional<Articulo> articuloBD = articuloRepository.findByCodigo(codigo);
+        if(articuloBD.isPresent()){
+            try {
+                articuloBD.get().setNombre(articulo.getNombre());
+                articuloBD.get().setFechaRegistro(articulo.getFechaRegistro());
+                articuloBD.get().setPrecioCompra(articulo.getPrecioCompra());
+                articuloBD.get().setPrecioVenta(articulo.getPrecioVenta());
+                articuloBD.get().setCategoria(articulo.getCategoria());
+                articuloBD.get().setDescricion(articulo.getDescricion());
+                articuloBD.get().setStock(articulo.getStock());
+                articuloRepository.save(articuloBD.get());
+                return new ResponseEntity(articuloBD,HttpStatus.OK);
+            }catch (Exception e){
+                return ResponseEntity.badRequest().build();
+            }
+        }else{
+            return  ResponseEntity.notFound().build();
+        }
+    }
 
 }
