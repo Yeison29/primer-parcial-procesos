@@ -1,26 +1,21 @@
 package com.primerparcialpn.articulos.models;
 
-public class Categoria {
-    private String nombreCategoria;
-    private String descripcionCategoria;
-    public Categoria(){
-        
-    }
-    public Categoria(String nombreCategoria,String descripcionCategoria){
-        this.nombreCategoria=nombreCategoria;
-        this.descripcionCategoria=descripcionCategoria;
-    }
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    public String getNombreCategoria(){
-        return nombreCategoria;
-    }
-    public String getDescripcionCategoria(){
-        return descripcionCategoria;
-    }
-    public void setNombreCategoria(String nombreCategoria){
-        this.nombreCategoria=nombreCategoria;
-    }
-    public void setDescripcionCategoria(String descripcionCategoria){
-        this.descripcionCategoria=descripcionCategoria;
-    }
+import javax.persistence.*;
+
+@Data
+@NoArgsConstructor
+@Entity
+@Table(name = "categorias")
+public class Categoria {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(length = 200,nullable = false)
+    private String nombreCategoria;
+    @Column(length = 300)
+    private String descripcionCategoria;
+
 }
