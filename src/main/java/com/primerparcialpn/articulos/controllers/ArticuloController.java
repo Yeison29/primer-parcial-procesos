@@ -64,5 +64,14 @@ public class ArticuloController {
             return  ResponseEntity.notFound().build();
         }
     }
+    @DeleteMapping(value = "/delete/{codigo}")
+    public ResponseEntity deleteArticulo(@PathVariable String codigo) {
+        Optional<Articulo> articuloBD = articuloRepository.findByCodigo(codigo);
+        if (articuloBD.isPresent()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }
