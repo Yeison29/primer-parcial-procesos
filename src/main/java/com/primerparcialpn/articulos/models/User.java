@@ -35,5 +35,4 @@ public class User {
     @Column(nullable = false, length = 64)
     @NotBlank(message = "La contraseña no puede estar en blanco")
     private String password;
-
 }
