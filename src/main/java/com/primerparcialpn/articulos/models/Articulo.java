@@ -19,7 +19,7 @@ public class Articulo {
     @Column(length = 100, nullable = false)
     private String nombre;
     @Column(length = 500)
-    private String descricion;
+    private String descripcion;
     @Column(nullable = false)
     private Date fecha;
     @Column(length = 50, nullable = false)

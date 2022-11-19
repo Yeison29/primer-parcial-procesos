@@ -42,7 +42,7 @@ public class ArticuloController {
         }
     }
 
-    @PutMapping(value = "/update/{codigo}")
+    @PutMapping(value = "/updateArticulo/{codigo}")
     public ResponseEntity updateArticulo(@PathVariable String codigo, @RequestBody Articulo articulo){
         Optional<Articulo> articuloBD = articuloRepository.findByCodigo(codigo);
         if(articuloBD.isPresent()){
@@ -52,7 +52,7 @@ public class ArticuloController {
                 articuloBD.get().setCompra(articulo.getCompra());
                 articuloBD.get().setVenta(articulo.getVenta());
                 articuloBD.get().setCategoria(articulo.getCategoria());
-                articuloBD.get().setDescricion(articulo.getDescricion());
+                articuloBD.get().setDescripcion(articulo.getDescripcion());
                 articuloBD.get().setStock(articulo.getStock());
                 articuloRepository.save(articuloBD.get());
                 return new ResponseEntity(articuloBD,HttpStatus.OK);

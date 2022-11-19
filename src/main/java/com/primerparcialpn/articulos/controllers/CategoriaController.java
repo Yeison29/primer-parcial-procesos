@@ -1,5 +1,6 @@
 package com.primerparcialpn.articulos.controllers;
 
+import com.primerparcialpn.articulos.models.Articulo;
 import com.primerparcialpn.articulos.models.Categoria;
 import com.primerparcialpn.articulos.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,22 @@ public class CategoriaController {
             return new ResponseEntity(categoria, HttpStatus.OK);
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+    @PutMapping(value = "/updateCategoria/{id}")
+    public ResponseEntity updateArticulo(@PathVariable Long id, @RequestBody Articulo categoria){
+        Optional<Categoria> categoriaBD = categoriaRepository.findById(id);
+        if(categoriaBD.isPresent()){
+            try {
+                categoriaBD.get().setNombre(categoria.getNombre());
+                categoriaBD.get().setDescripcion(categoria.getDescripcion());
+                categoriaRepository.save(categoriaBD.get());
+                return new ResponseEntity(categoriaBD,HttpStatus.OK);
+            }catch (Exception e){
+                return ResponseEntity.badRequest().build();
+            }
+        }else{
+            return  ResponseEntity.notFound().build();
         }
     }
 }
