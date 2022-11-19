@@ -1,40 +1,25 @@
 package com.primerparcialpn.articulos.controllers;
 
 import com.primerparcialpn.articulos.models.Articulo;
-import com.primerparcialpn.articulos.models.Categoria;
 import com.primerparcialpn.articulos.repository.ArticuloRepository;
-import com.primerparcialpn.articulos.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 @RestController
 public class ArticuloController {
     @Autowired
     private ArticuloRepository articuloRepository;
-    @Autowired
-    private CategoriaRepository categoriaRepository;
     @PostMapping(value = "/articulo")
     public ResponseEntity createArticulo(@RequestBody Articulo articulo){
         try{
             articuloRepository.save(articulo);
             return new ResponseEntity(articulo, HttpStatus.CREATED);
         }catch (Exception e){
-            return  ResponseEntity.badRequest().build();
-        }
-    }
-    @PostMapping(value = "/categoria")
-    public ResponseEntity createCategoria(@RequestBody Categoria categoria){
-        try{
-            categoriaRepository.save(categoria);
-            return new ResponseEntity(categoria, HttpStatus.CREATED);
-        }catch (Exception e){
-            System.out.println(e.fillInStackTrace());
             return  ResponseEntity.badRequest().build();
         }
     }
