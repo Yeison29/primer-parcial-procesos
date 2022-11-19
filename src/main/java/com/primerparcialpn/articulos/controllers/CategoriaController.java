@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class CategoriaController {
@@ -30,6 +31,15 @@ public class CategoriaController {
             return ResponseEntity.notFound().build();
         }else{
             return new ResponseEntity(categorias,HttpStatus.OK);
+        }
+    }
+    @GetMapping(value = "categoria/{id}")
+    public ResponseEntity getCategoria(@PathVariable Long id) {
+        Optional<Categoria> categoria = categoriaRepository.findById(id);
+        if (categoria.isPresent()) {
+            return new ResponseEntity(categoria, HttpStatus.OK);
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 }
