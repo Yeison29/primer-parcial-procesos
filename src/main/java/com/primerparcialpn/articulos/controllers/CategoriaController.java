@@ -1,73 +1,57 @@
 package com.primerparcialpn.articulos.controllers;
 
-import com.primerparcialpn.articulos.models.Articulo;
 import com.primerparcialpn.articulos.models.Categoria;
-import com.primerparcialpn.articulos.repository.CategoriaRepository;
+import com.primerparcialpn.articulos.services.CategoriaService;
+import com.primerparcialpn.articulos.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
 public class CategoriaController {
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private CategoriaService categoriaService;
+    @Autowired
+    private JWTUtil jwtUtil;
     @PostMapping(value = "/categoria")
-    public ResponseEntity createCategoria(@RequestBody Categoria categoria){
-        try{
-            categoriaRepository.save(categoria);
-            return new ResponseEntity(categoria, HttpStatus.CREATED);
-        }catch (Exception e){
-            System.out.println(e.fillInStackTrace());
-            return  ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity createCategoria(@Valid @RequestBody Categoria categoria){
+        return categoriaService.createCategoria(categoria);
     }
     @GetMapping(value = "categorias")
-    public ResponseEntity listCategorias(){
-        List<Categoria> categorias = categoriaRepository.findAll();
-        if(categorias.isEmpty()){
-            return ResponseEntity.notFound().build();
+    public ResponseEntity listCategorias(@RequestHeader(value = "Authorization") String token){
+        if(jwtUtil.getKey(token)==null){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("¡Token no valido!");
         }else{
-            return new ResponseEntity(categorias,HttpStatus.OK);
+            return categoriaService.allCategorias();
         }
     }
     @GetMapping(value = "categoria/{id}")
-    public ResponseEntity getCategoria(@PathVariable Long id) {
-        Optional<Categoria> categoria = categoriaRepository.findById(id);
-        if (categoria.isPresent()) {
-            return new ResponseEntity(categoria, HttpStatus.OK);
-        } else {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity getCategoria(@PathVariable Long id, @RequestHeader(value = "Authorization") String token) {
+        if(jwtUtil.getKey(token)==null){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("¡Token no valido!");
+        }else{
+            return categoriaService.getCategoriaById(id);
         }
     }
     @PutMapping(value = "/updateCategoria/{id}")
-    public ResponseEntity updateArticulo(@PathVariable Long id, @RequestBody Articulo categoria){
-        Optional<Categoria> categoriaBD = categoriaRepository.findById(id);
-        if(categoriaBD.isPresent()){
-            try {
-                categoriaBD.get().setNombre(categoria.getNombre());
-                categoriaBD.get().setDescripcion(categoria.getDescripcion());
-                categoriaRepository.save(categoriaBD.get());
-                return new ResponseEntity(categoriaBD,HttpStatus.OK);
-            }catch (Exception e){
-                return ResponseEntity.badRequest().build();
-            }
+    public ResponseEntity updateArticulo(@PathVariable Long id, @RequestBody Categoria categoria, @RequestHeader(value = "Authorization") String token){
+        if(jwtUtil.getKey(token)==null){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("¡Token no valido!");
         }else{
-            return  ResponseEntity.notFound().build();
+            return categoriaService.editCategoria(id, categoria);
         }
     }
     //La categoria se puede eliminar siempre y cuando esa categoria no este relacionado con ningun articulo
     @DeleteMapping(value = "/deleteCategoria/{id}")
-    public ResponseEntity deleteCategoria(@PathVariable Long id) {
-        Optional<Categoria> categoriaBD = categoriaRepository.findById(id);
-        if (categoriaBD.isPresent()) {
-            categoriaRepository.delete(categoriaBD.get());
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity deleteCategoria(@PathVariable Long id, @RequestHeader(value = "Authorization") String token) {
+        if(jwtUtil.getKey(token)==null){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("¡Token no valido!");
+        }else{
+            return categoriaService.deleteCategoria(id);
         }
     }
 }
