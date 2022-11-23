@@ -30,6 +30,8 @@ public class Articulo {
     private int compra;
     @ManyToOne
     private  Categoria categoria;
+    @ManyToOne
+    private User user;
 
     /*código, nombre, descripción, fecha de registro,
     categoria( tiene un nombre y una descripción), stock,
