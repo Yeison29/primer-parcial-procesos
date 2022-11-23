@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -35,5 +36,6 @@ public class User {
     @Column(nullable = false, length = 64)
     @NotBlank(message = "La contraseña no puede estar en blanco")
     private String password;
+
 
 }
