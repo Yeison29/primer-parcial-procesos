@@ -59,4 +59,15 @@ public class CategoriaController {
             return  ResponseEntity.notFound().build();
         }
     }
+    //La categoria se puede eliminar siempre y cuando esa categoria no este relacionado con ningun articulo
+    @DeleteMapping(value = "/deleteCategoria/{id}")
+    public ResponseEntity deleteCategoria(@PathVariable Long id) {
+        Optional<Categoria> categoriaBD = categoriaRepository.findById(id);
+        if (categoriaBD.isPresent()) {
+            categoriaRepository.delete(categoriaBD.get());
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
