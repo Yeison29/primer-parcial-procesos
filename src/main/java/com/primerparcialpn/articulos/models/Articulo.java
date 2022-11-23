@@ -4,7 +4,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
-
+//Hola
 @Data
 @NoArgsConstructor
 @Entity
