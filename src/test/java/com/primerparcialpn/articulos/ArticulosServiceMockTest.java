@@ -1,7 +1,6 @@
 package com.primerparcialpn.articulos;
 import com.primerparcialpn.articulos.models.Articulo;
 import com.primerparcialpn.articulos.repository.ArticuloRepository;
-import com.primerparcialpn.articulos.repository.CategoriaRepository;
 import com.primerparcialpn.articulos.services.ArticuloServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

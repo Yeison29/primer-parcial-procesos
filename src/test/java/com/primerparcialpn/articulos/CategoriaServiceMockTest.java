@@ -1,6 +1,5 @@
 package com.primerparcialpn.articulos;
 
-import com.primerparcialpn.articulos.models.Articulo;
 import com.primerparcialpn.articulos.models.Categoria;
 import com.primerparcialpn.articulos.repository.CategoriaRepository;
 import com.primerparcialpn.articulos.services.CategoriaServiceImpl;
