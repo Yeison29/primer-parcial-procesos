@@ -1,5 +1,6 @@
 package com.primerparcialpn.articulos;
 
+import com.primerparcialpn.articulos.models.Articulo;
 import com.primerparcialpn.articulos.models.Categoria;
 import com.primerparcialpn.articulos.repository.CategoriaRepository;
 import com.primerparcialpn.articulos.services.CategoriaServiceImpl;
@@ -22,8 +23,16 @@ public class CategoriaServiceMockTest {
     public static Categoria mockCategoria() {
         Categoria modelo = new Categoria();
         modelo.setId(1L);
-        modelo.setNombre("Limpiza");
-        modelo.setDescripcion("Productos detergetes");
+        modelo.setNombre("Ropa");
+        modelo.setDescripcion("Productos de tela");
+
+        return modelo;
+    }
+    public static Categoria mockCategoriaMod() {
+        Categoria modelo = new Categoria();
+        modelo.setId(1L);
+        modelo.setNombre("Ropa");
+        modelo.setDescripcion("Productos de algodon");
 
         return modelo;
     }
@@ -44,5 +53,34 @@ public class CategoriaServiceMockTest {
         //Then
         Assertions.assertNotNull(lista);
     }
+    @DisplayName("Test para crear Categoria")
+    @Test
+    void createArticleTest() {
+        //Given
+        Categoria categoria = mockCategoria();
+        given(categoriaRepository.findById(categoria.getId())).willReturn(Optional.of(categoria));
+        given(categoriaRepository.save(categoria)).willReturn(categoria);
+        //When
 
+        ResponseEntity<Categoria> categoriaGuardado = categoriaService.createCategoria(categoria);
+
+        //Then
+        Assertions.assertNotNull(categoriaGuardado);
+    }
+    @DisplayName("Test para editar una Categoria")
+    @Test
+    void editCategoriaTest() {
+        // Given
+        Categoria categoria = mockCategoria();
+        Categoria categoriaMod = mockCategoriaMod();
+        given(categoriaRepository.findById(categoria.getId())).willReturn(Optional.of(categoria));
+        given(categoriaRepository.save(categoriaMod)).willReturn(categoriaMod);
+
+        //when
+
+        ResponseEntity<Categoria> categoriaGuardado = categoriaService.editCategoria(categoria.getId(), categoriaMod);
+
+        //Then
+        Assertions.assertNotNull(categoriaGuardado);
+    }
 }
