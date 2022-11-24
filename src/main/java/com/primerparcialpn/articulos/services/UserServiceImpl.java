@@ -92,6 +92,7 @@ public class UserServiceImpl implements UserService{
                 userBD.get().setEmail(user.getEmail());
                 userBD.get().setPassword(passwordEncoder.encode(user.getPassword()));
                 userRepository.save(userBD.get());
+                return new ResponseEntity(userBD, HttpStatus.OK);
             }catch (Exception e){
                 return ResponseEntity.badRequest().build();
             }
