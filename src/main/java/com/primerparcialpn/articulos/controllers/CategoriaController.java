@@ -37,7 +37,7 @@ public class CategoriaController {
         }
     }
     @PutMapping(value = "/updateCategoria/{id}")
-    public ResponseEntity updateArticulo(@PathVariable Long id, @RequestBody Categoria categoria, @RequestHeader(value = "Authorization") String token){
+    public ResponseEntity updateCategoria(@PathVariable Long id, @RequestBody Categoria categoria, @RequestHeader(value = "Authorization") String token){
         if(jwtUtil.getKey(token)==null){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("¡Token no valido!");
         }else{
