@@ -60,9 +60,6 @@ public class ArticulosServiceMockTest {
     @Mock
     private ArticuloRepository articuloRepository;
 
-    @Mock
-    private CategoriaRepository categoriaRepository;
-
     @DisplayName("Test para obtener articulos por codigo")
     @Test
     void GetArticleByCodTest() {

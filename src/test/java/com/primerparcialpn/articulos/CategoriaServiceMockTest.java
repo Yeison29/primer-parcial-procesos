@@ -1,5 +1,7 @@
 package com.primerparcialpn.articulos;
+
 import com.primerparcialpn.articulos.models.Categoria;
+
 public class CategoriaServiceMockTest {
     public static Categoria mockCategoria() {
         Categoria modelo = new Categoria();
