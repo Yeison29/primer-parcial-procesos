@@ -4,7 +4,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
-//Hola
+
 @Data
 @NoArgsConstructor
 @Entity
@@ -32,6 +32,7 @@ public class Articulo {
     private  Categoria categoria;
     @ManyToOne
     private User user;
+
 
     /*código, nombre, descripción, fecha de registro,
     categoria( tiene un nombre y una descripción), stock,
