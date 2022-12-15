@@ -28,13 +28,13 @@ public class ArticulosServiceMockTest {
     public static Articulo mockArticulo() {
         Articulo modelo = new Articulo();
         modelo.setId(1L);
-        modelo.setCodigo("123");
-        modelo.setNombre("Limpido");
+        modelo.setCodigo("fs343");
+        modelo.setNombre("Cuchillos");
         modelo.setStock(2);
         modelo.setCategoria(mockCategoria());
-        modelo.setDescripcion("HCL");
-        modelo.setVenta(2000);
-        modelo.setCompra(5000);
+        modelo.setDescripcion("Si lo tocas corta");
+        modelo.setVenta(22300);
+        modelo.setCompra(544500);
         modelo.setFecha(new Date(10,10,20));
 
         return modelo;
@@ -42,11 +42,11 @@ public class ArticulosServiceMockTest {
     public static Articulo mockArticuloMod() {
         Articulo modelo = new Articulo();
         modelo.setId(1L);
-        modelo.setCodigo("1");
-        modelo.setNombre("Lejia");
+        modelo.setCodigo("23rdfd");
+        modelo.setNombre("Platos");
         modelo.setStock(2);
         modelo.setCategoria(mockCategoria());
-        modelo.setDescripcion("HCL");
+        modelo.setDescripcion("Sirve tu comida");
         modelo.setVenta(2000);
         modelo.setCompra(5000);
         modelo.setFecha(new Date(10,10,20));
