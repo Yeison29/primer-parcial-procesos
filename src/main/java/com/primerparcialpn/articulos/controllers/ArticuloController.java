@@ -36,14 +36,14 @@ public class ArticuloController {
         return articuloService.getArticulo(codigo);
     }
 
-    @PutMapping(value = "/updateArticulo/{codigo}")
+    @PutMapping(value = "/articulo/{codigo}")
     public ResponseEntity updateArticulo(@PathVariable String codigo,@Valid @RequestBody Articulo articulo, @RequestHeader(value = "Authorization") String token){
         if(jwtUtil.getKey(token)==null){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("¡Token no valido!");
         }
         return articuloService.updateArticulo(codigo,articulo);
     }
-    @DeleteMapping(value = "/delete/{codigo}")
+    @DeleteMapping(value = "/articulo/{codigo}")
     public ResponseEntity deleteArticulo(@PathVariable String codigo, @RequestHeader(value = "Authorization") String token) {
         if(jwtUtil.getKey(token)==null){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("¡Token no valido!");
