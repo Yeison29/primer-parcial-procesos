@@ -24,7 +24,7 @@ public class UserServiceMockTest {
         modelo.setLastname("Campo");
         modelo.setDocument("1002334333");
         modelo.setDirection("Ocaña");
-        modelo.setDate_Of_Birth(new Date(10,10,20));
+        modelo.setDate(new Date(10,10,20));
         modelo.setPhone("3143454323");
         modelo.setEmail("josue@gmail.com");
         modelo.setPassword("ashwusudsu");
@@ -36,7 +36,7 @@ public class UserServiceMockTest {
         modelo.setLastname("ascanio");
         modelo.setDocument("1002894333");
         modelo.setDirection("Ocaña");
-        modelo.setDate_Of_Birth(new Date(10,10,20));
+        modelo.setDate(new Date(10,10,20));
         modelo.setPhone("3123454323");
         modelo.setEmail("yeison@gmail.com");
         modelo.setPassword("aureisfidsu");

@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService{
                 userBD.get().setLastname(user.getLastname());
                 userBD.get().setDirection(user.getDirection());
                 userBD.get().setDocument(user.getDocument());
-                userBD.get().setDate_Of_Birth(user.getDate_Of_Birth());
+                userBD.get().setDate(user.getDate());
                 userBD.get().setPhone(user.getPhone());
                 userBD.get().setEmail(user.getEmail());
                 userBD.get().setPassword(passwordEncoder.encode(user.getPassword()));
